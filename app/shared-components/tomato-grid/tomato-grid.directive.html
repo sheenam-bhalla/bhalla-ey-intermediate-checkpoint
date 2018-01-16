@@ -1,0 +1,29 @@
+<!-- Add tomato grid here -->
+<div ng-if="vm.loading">
+    Loading...
+</div>
+<div ng-if="!vm.loading" style="padding:20px">
+        <table>
+            <tr>                                    
+                <td class="searchLabel"><b> Search: </b></td>
+                <td class="searchBox"> <input class="form-control" type="text" ng-model="q"> </td> 
+            </tr>
+        </table>
+    <table class="table table-condensed table-hover" id="tblData" style="margin-top:1%">
+        <thead class="thead-light" style="background-color:lightgrey">
+            <th ng-repeat="header in vm.tableHeader">
+                {{header.title}}
+            </th>
+        </thead>
+        <tbody>
+            <tr dir-paginate="data in vm.gridData | filter: q | itemsPerPage: 15" pagination-id="vm.listView">
+                <td> {{ ::data.color.Title }} </td>
+                <td> {{ ::data.cost }} </td>
+                <td> {{ ::data.ounces }} </td>
+                <td> {{ ::data.picked }} </td>
+                <td> {{ ::data.season.Title }} </td>
+            </tr>
+        </tbody>
+    </table>
+    <dir-pagination-controls max-size="5" boundary-links="true" direction-links="true" pagination-id="vm.listView"></dir-pagination-controls>
+</div>

@@ -1,0 +1,46 @@
+<section class="container-fluid">
+    <tomato-loading-indicator 
+      ng-if="vm.loading" 
+      text="Fetching tomato data..."
+    />
+
+<!--Tomato Chart-->    
+    <div class="row">
+        <div class="col-xs-12 col-sm-6">
+            <tomato-chart 
+              ng-if="!vm.loading" 
+              data="vm.tomatoes" 
+              type="Bar"
+              id="bar"
+              class-name="chart chart-bar"
+              header="Tomato Yield by Season"
+              horizontal-axis-label="Seasons"
+              vertical-axis-label="Ounces"
+            />
+        </div>
+        <div class="col-xs-12 col-sm-6">
+                <tomato-chart
+                ng-if="!vm.loading"
+                data="vm.tomatoes"
+                type="Line"
+                id="line"
+                class-name= "chart chart-line"
+                header="Tomato Revenue by Season"
+                horizontal-axis-label="Seasons"
+                vertical-axis-label="Ounces"
+              />
+        </div>
+    </div>
+</section>
+
+<!--Tomato Grid-->
+<uib-tabset>
+    <uib-tab index="$index" ng-repeat="gridData in vm.farms track by $index" heading="{{gridData.Title}}" select="vm.setActiveTabIndex($index)" />
+    <tomato-grid
+        ng-if="vm.activeTabIndex === $index"
+        ng-repeat="gridData in vm.farms track by $index"
+        data="vm.tomatoes"
+        list-View="gridData.Title"
+    >
+    </tomato-grid>
+</uib-tabset>
